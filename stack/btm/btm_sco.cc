@@ -1,6 +1,7 @@
 /******************************************************************************
  *
  *  Copyright 2000-2012 Broadcom Corporation
+ *  Copyright (C) 2021 Infineon Semiconductor Corporation
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -86,7 +87,7 @@ void btm_sco_init(void) {
   btm_cb.sco_cb.sco_disc_reason = BTM_INVALID_SCO_DISC_REASON;
   btm_cb.sco_cb.def_esco_parms = esco_parameters_for_codec(ESCO_CODEC_CVSD);
   btm_cb.sco_cb.def_esco_parms.max_latency_ms = 12;
-  btm_cb.sco_cb.sco_route = ESCO_DATA_PATH_PCM;
+  btm_cb.sco_cb.sco_route = ESCO_DATA_PATH;
 }
 
 /*******************************************************************************

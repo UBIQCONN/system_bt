@@ -1,6 +1,7 @@
 /******************************************************************************
  *
  *  Copyright 2015 Broadcom Corporation
+ *  Copyright 2021 Infineon Semiconductor Corporation
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -60,6 +61,13 @@ typedef uint8_t esco_pcm_data_format_t;
 #define ESCO_DATA_PATH_PCM 1                /* 0x01-0xFE (PCM Chan) */
 #define ESCO_DATA_PATH_HCI ((uint8_t)0x00)  /* HCI-0, 0x01-0xFE (PCM Chan) */
 #define ESCO_DATA_PATH_TEST ((uint8_t)0xFF) /* 0xFF-Audio Test */
+#define ESCO_DATA_PATH_PCM_MASTER 4 /* 0x04 - PCM Chan, Bus Master */
+#define ESCO_DATA_PATH_I2S_MASTER 5 /* 0x05 - I2S Chan, Bus Master */
+#define ESCO_DATA_PATH_PCM_SLAVE 6 /* 0x06 - PCM Chan, Bus Slave */
+#define ESCO_DATA_PATH_I2S_SLAVE 7 /* 0x07 - I2S Chan, Bus Slave */
+#ifndef ESCO_DATA_PATH
+#define ESCO_DATA_PATH  ESCO_DATA_PATH_I2S_SLAVE
+#endif
 typedef uint8_t esco_data_path_t;
 
 // eSCO constants
@@ -67,8 +75,18 @@ typedef uint8_t esco_data_path_t;
 #define TXRX_128KBITS_RATE 0x00003E80 /* 128 kbits/sec data rate */
 typedef uint32_t esco_txrx_bandwidth_t;
 
-#define INPUT_OUTPUT_64K_RATE 0x00003E80  /* 16000 Bytes/sec over transport */
-#define INPUT_OUTPUT_128K_RATE 0x00007D00 /* 32000 Bytes/sec over transport */
+#define INPUT_OUTPUT_16K_RATE 0x00003E80  /* 16000 Bytes/sec (128K bits/sec) over transport*/
+#define INPUT_OUTPUT_32K_RATE 0x00007D00 /* 32000 Bytes/sec (256K bits/sec) over transport */
+#define INPUT_OUTPUT_64K_RATE 0x0000FA00 /* 64000 Bytes/sec (512K bits/sec) over transport */
+#define INPUT_OUTPUT_128K_RATE 0x0001F400 /* 128000 Bytes/sec (1024K bits/sec) over transport */
+#define INPUT_OUTPUT_256K_RATE 0x0003E800 /* 256000 Bytes/sec (2048K bits/sec) over transport */
+#ifndef INPUT_OUTPUT_RATE_CVSD
+#define INPUT_OUTPUT_RATE_CVSD  INPUT_OUTPUT_16K_RATE
+#endif
+#ifndef INPUT_OUTPUT_RATE_mSBC
+#define INPUT_OUTPUT_RATE_mSBC  INPUT_OUTPUT_32K_RATE
+#endif
+
 typedef uint32_t esco_io_bandwidth_t;
 
 // Retransmission effort
